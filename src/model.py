@@ -2,11 +2,27 @@ import numpy as np
 from scipy.sparse.linalg import svds
 
 def compute_svd(ratings_matrix, k=50):
-    user_means = np.mean(ratings_matrix, axis=1)
-    R_demeaned = ratings_matrix - user_means.reshape(-1, 1)
 
+    # Mask of non-zero entries
+    mask = ratings_matrix > 0
+
+    # Compute user means ONLY on rated items
+    user_means = np.sum(ratings_matrix, axis=1) / np.maximum(mask.sum(axis=1), 1)
+
+    # Demean ONLY rated entries
+    R_demeaned = ratings_matrix.copy()
+    for i in range(R_demeaned.shape[0]):
+        R_demeaned[i, mask[i]] -= user_means[i]
+
+    # SVD
     U, sigma, Vt = svds(R_demeaned, k=k)
     sigma = np.diag(sigma)
 
-    predicted = np.dot(np.dot(U, sigma), Vt) + user_means.reshape(-1, 1)
+    # Reconstruct
+    predicted = np.dot(np.dot(U, sigma), Vt)
+
+    # Add means back
+    for i in range(predicted.shape[0]):
+        predicted[i] += user_means[i]
+
     return predicted
