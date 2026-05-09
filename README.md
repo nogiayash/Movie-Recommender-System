@@ -11,7 +11,7 @@
 
 ## 🚀 Live Demo
 
-👉 **[Launch the App](https://your-app-name.streamlit.app)**
+👉 **[Launch the App](https://movie-recommender-system-qxdfea2gstx7jwq4wynccg.streamlit.app/)**
 <img width="1904" height="990" alt="image" src="https://github.com/user-attachments/assets/678ec37e-e72b-474e-b09e-c1f0fa3c4c5f" />
 
 
