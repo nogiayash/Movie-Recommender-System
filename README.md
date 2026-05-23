@@ -24,36 +24,9 @@ With millions of titles across Netflix's catalog, users face **decision fatigue*
 
 ---
 
-## 🧠 How It Works
+## 🧠 Architecture
+<img width="1693" height="929" alt="Movie recommender System" src="https://github.com/user-attachments/assets/6edaac90-9db0-4149-a704-9e62c7e8e2d9" />
 
-This system uses **Matrix Factorization via SVD (Singular Value Decomposition)** to uncover hidden patterns in user–movie interaction data.
-
-### Pipeline
-
-```
-Raw Ratings Data
-      │
-      ▼
-User-Item Matrix Construction
-      │
-      ▼
-Mean-Centering (remove user bias)
-      │
-      ▼
-SVD Decomposition (SciPy)
-      │
-      ▼
-Rating Matrix Reconstruction
-      │
-      ▼
-Top-N Personalized Recommendations
-```
-
-1. **Build a User-Item Matrix** from historical ratings data
-2. **Normalize ratings** by subtracting each user's mean (removes individual rating bias)
-3. **Apply SVD** to factorize the matrix into latent feature spaces
-4. **Reconstruct predictions** by multiplying decomposed matrices
-5. **Rank & recommend** unrated movies with the highest predicted scores
 
 ---
 
